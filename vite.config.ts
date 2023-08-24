@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/carousel/'
+  base: '/carousel/',
+  build: {
+    target: 'esnext'
+  }
 })
