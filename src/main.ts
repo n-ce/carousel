@@ -1,4 +1,7 @@
+import { applyTheme, themeFromImage } from '@material/material-color-utilities';
 import './style.css';
+
+
 const [prev, next] = document.getElementsByTagName('button');
 const carousel = document.querySelector('section');
 const imgs = document.getElementsByTagName('img');
@@ -15,53 +18,45 @@ const loadImg = async () => {
 }
 
 
-for (const img of imgs)
-  img.src = await loadImg();
 
-
+imgs[1].src = await loadImg();
+imgs[0].src = await loadImg();
+imgs[2].src = await loadImg();
 
 
 async function generateLeftSlide() {
-
   imgs[0].scrollIntoView();
   const img = document.createElement('img');
+  img.crossOrigin = 'anonymous';
   img.src = await loadImg();
   carousel?.prepend(img);
   imgs[2].remove();
+  theme(isDarkTheme);
 }
 async function generateRightSlide() {
-
   imgs[2].scrollIntoView();
   const img = document.createElement('img');
+  img.crossOrigin = 'anonymous';
   img.src = await loadImg();
   carousel?.appendChild(img);
   imgs[0].remove();
+  theme(isDarkTheme);
 }
 
 prev.addEventListener('click', generateLeftSlide);
 
 next.addEventListener('click', generateRightSlide);
 
-/*
-function viewable(element: HTMLImageElement): boolean {
-  const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= innerHeight &&
-    rect.right <= innerWidth
-  );
+
+const isDarkTheme = matchMedia('(prefers-color-scheme: dark)');
+
+async function theme(dark: { matches: boolean }) {
+  applyTheme(await themeFromImage(imgs[1]), { target: document.documentElement, dark: dark.matches });
 }
 
-// on scroll load new slide
-carousel?.addEventListener('scroll', () => {
-  setTimeout(() => {
-    if (viewable(imgs[1]))
-      return;
-    if (viewable(imgs[0]))
-      generateLeftSlide();
-    if (viewable(imgs[2]))
-      generateRightSlide();
-  }, 1000);
-})
-*/
+theme(isDarkTheme);
+
+isDarkTheme.addEventListener('change', theme);
+
+
+
