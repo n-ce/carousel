@@ -59,4 +59,14 @@ theme(isDarkTheme);
 isDarkTheme.addEventListener('change', theme);
 
 
+// scrolling action 
+
+carousel?.addEventListener('scroll', () => {
+  if (imgs[0].getBoundingClientRect().left === carousel.getBoundingClientRect().left)
+    generateLeftSlide();
+
+  if (imgs[2].getBoundingClientRect().right < carousel.getBoundingClientRect().right)
+    generateRightSlide();
+});
+
 
