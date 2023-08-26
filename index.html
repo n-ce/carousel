@@ -11,20 +11,48 @@
 
 <body>
   <h1>Carousel</h1>
+  <button id="settings" class="material-icons">settings</button>
+  <div id="overlay" class="hide"></div>
+  <div id="settingsContainer" class="hide">
+    <i class="material-icons">wallpaper</i>
+    <h2>Set Image Resolution</h2>
+    <div id="radio">
+      <span>
+        <input type="radio" name="pixelSelector" value="5" id="lowest">
+        <label for="lowest">lowest</label>
+      </span>
+      <span>
+        <input type="radio" name="pixelSelector" value="2" id="low">
+        <label for="low">low</label>
+      </span>
+      <span>
+        <input type="radio" name="pixelSelector" id="default" value="1" checked>
+        <label for="default">default</label>
+      </span>
+      <span>
+        <input type="radio" name="pixelSelector" id="high" value="0.5">
+        <label for="high">high</label>
+      </span>
+    </div>
+    <span id="settingsActions">
+      <button id="closeSettings">Cancel</button>
+      <button id="saveSettings">Save</button>
+    </span>
+  </div>
   <main>
-    <button class="material-icons">chevron_left</button>
+    <button id="left" class="material-icons">chevron_left</button>
     <section>
       <img crossorigin="anonymous">
       <img crossorigin="anonymous">
       <img crossorigin="anonymous">
     </section>
-    <button class="material-icons">chevron_right</button>
+    <button id="right" class="material-icons">chevron_right</button>
   </main>
   <script type="module" src="/src/main.ts"></script>
-  <!-- Dev 
+  <!-- dev
   <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
   <script>eruda.init()</script>
-   only -->
+  only -->
 </body>
 
 </html>

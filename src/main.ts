@@ -2,15 +2,19 @@ import { applyTheme, themeFromImage } from '@material/material-color-utilities';
 import './style.css';
 
 
-const [prev, next] = document.getElementsByTagName('button');
+const [settings, closeSettings, saveSettings, prev, next] = document.getElementsByTagName('button');
 const carousel = document.querySelector('section');
 const imgs = document.getElementsByTagName('img');
 
 imgs[1].scrollIntoView();
 
+let quality = 1;
+
+
 const loadImg = async () => {
   if (!carousel) return;
-  const dimension = Math.floor(carousel.clientWidth * devicePixelRatio / 5);
+
+  const dimension = Math.floor(carousel.clientWidth * devicePixelRatio / quality);
 
   return await fetch(`https://source.unsplash.com/random/${dimension}x${dimension}`)
     .then(data => data.url)
@@ -70,3 +74,19 @@ carousel?.addEventListener('scroll', () => {
 });
 
 
+// settings 
+
+function settingsFx() {
+  document.getElementById('settingsContainer')?.classList.toggle('hide');
+  document.getElementById('overlay')?.classList.toggle('hide');
+}
+
+settings.addEventListener('click', settingsFx);
+
+closeSettings?.addEventListener('click', settingsFx);
+
+saveSettings.addEventListener('click', () => {
+  const checkedElement = <HTMLInputElement>document.querySelector('input[name="pixelSelector"]:checked');
+  quality = parseInt(checkedElement?.value);
+  settingsFx();
+})
