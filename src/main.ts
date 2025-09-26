@@ -16,7 +16,7 @@ const loadImg = async () => {
 
   const dimension = Math.floor(carousel.clientWidth * devicePixelRatio / quality);
 
-  return await fetch(`https://source.unsplash.com/random/${dimension}x${dimension}`)
+  return await fetch(`https://picsum.photos/${dimension}/${dimension}`)
     .then(data => data.url)
     .catch(err => err);
 }
